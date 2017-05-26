@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, ViewController } from 'ionic-angular';
 
-import { Camera } from '@ionic-native/camera';
+import { TaskProvider } from '../../providers/task';
 
 
 @Component({
@@ -14,11 +14,11 @@ export class ItemCreatePage {
 
   isReadyToSave: boolean;
 
-  item: any;
+  task: any;
 
   form: FormGroup;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder) {
     this.form = formBuilder.group({
       profilePic: [''],
       name: ['', Validators.required],
@@ -33,22 +33,6 @@ export class ItemCreatePage {
 
   ionViewDidLoad() {
 
-  }
-
-  getPicture() {
-    if (Camera['installed']()) {
-      this.camera.getPicture({
-        destinationType: this.camera.DestinationType.DATA_URL,
-        targetWidth: 96,
-        targetHeight: 96
-      }).then((data) => {
-        this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
-      }, (err) => {
-        alert('Unable to take photo');
-      })
-    } else {
-      this.fileInput.nativeElement.click();
-    }
   }
 
   processWebImage(event) {

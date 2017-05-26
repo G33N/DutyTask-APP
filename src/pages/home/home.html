@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title> Task List </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addTask()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let task of tasks">
+      <button ion-item (click)="openTask(task)">
+        <h2>{{task.tittle}}</h2>
+        <p>{{task.detail}}</p>
+        <ion-note item-end *ngIf="task.starDate">{{task.starDate}}</ion-note>
+      </button>
+
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deleteTask(task._id)">
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
