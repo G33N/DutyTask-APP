@@ -37,7 +37,7 @@ export class HomePage {
     let addModal = this.modalCtrl.create(ItemCreatePage);
     addModal.onDidDismiss(task => {
       if (task) {
-        this.tasks.add(task);
+        this.TaskProvider.add(task);
       }
     })
     addModal.present();

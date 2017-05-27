@@ -17,7 +17,7 @@
   <ion-list>
     <ion-item-sliding *ngFor="let task of tasks">
       <button ion-item (click)="openTask(task)">
-        <h2>{{task.tittle}}</h2>
+        <h2>{{task.title}}</h2>
         <p>{{task.detail}}</p>
         <ion-note item-end *ngIf="task.starDate">{{task.starDate}}</ion-note>
       </button>

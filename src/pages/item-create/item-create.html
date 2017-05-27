@@ -27,10 +27,16 @@
   <form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">
     <ion-list>
       <ion-item>
-        <ion-input type="text" placeholder="tittle" formControlName="name"></ion-input>
+        <ion-input type="text" placeholder="Title" formControlName="title"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input type="text" placeholder="Detail" formControlName="about"></ion-input>
+        <ion-input type="text" placeholder="Start Date" formControlName="startDate"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="End Date" formControlName="endDate"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-textarea type="text" placeholder="Detail" formControlName="detail"></ion-textarea>
       </ion-item>
     </ion-list>
   </form>

@@ -20,9 +20,12 @@ export class ItemCreatePage {
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder) {
     this.form = formBuilder.group({
-      profilePic: [''],
-      name: ['', Validators.required],
-      about: ['']
+      title: ['', Validators.required],
+      startDate: [''],
+      endDate: [''],
+      detail: [''],
+      state: [''],
+      date: new Date
     });
 
     // Watch the form for changes, and
@@ -33,21 +36,6 @@ export class ItemCreatePage {
 
   ionViewDidLoad() {
 
-  }
-
-  processWebImage(event) {
-    let reader = new FileReader();
-    reader.onload = (readerEvent) => {
-
-      let imageData = (readerEvent.target as any).result;
-      this.form.patchValue({ 'profilePic': imageData });
-    };
-
-    reader.readAsDataURL(event.target.files[0]);
-  }
-
-  getProfileImageStyle() {
-    return 'url(' + this.form.controls['profilePic'].value + ')'
   }
 
   /**

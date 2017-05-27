@@ -33,7 +33,7 @@ export class TaskProvider {
 }
 add(data) {
   return new Promise((resolve, reject) => {
-    this.http.post(this.apiUrl+'/task', JSON.stringify(data))
+    this.http.post(this.apiUrl+'/task', data)
       .subscribe(res => {
         resolve(res);
       }, (err) => {
