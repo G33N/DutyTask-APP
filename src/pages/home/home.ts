@@ -10,8 +10,8 @@ import { ItemCreatePage } from '../item-create/item-create';
 })
 export class HomePage {
 
-
   tasks: any;
+  category: any;
 
   constructor(public navCtrl: NavController, public TaskProvider: TaskProvider, public modalCtrl: ModalController) {
     this.getTaks();
@@ -21,7 +21,7 @@ export class HomePage {
     this.TaskProvider.get()
       .then(data => {
         this.tasks = data;
-        console.log(this.tasks);
+        console.log(data);
       });
   }
   /**
@@ -37,7 +37,9 @@ export class HomePage {
     let addModal = this.modalCtrl.create(ItemCreatePage);
     addModal.onDidDismiss(task => {
       if (task) {
-        this.TaskProvider.add(task);
+        this.TaskProvider.add(task).then(data => {
+          this.getTaks();
+        });
       }
     })
     addModal.present();
@@ -48,11 +50,9 @@ export class HomePage {
    */
   deleteTask(task) {
     this.TaskProvider.delete(task).
-    then(data => {
-      this.tasks = data;
-      console.log(this.tasks);
-    });
-
+      then(data => {
+        this.getTaks();
+      });
   }
 
   /**

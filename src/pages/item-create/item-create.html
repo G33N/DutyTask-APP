@@ -30,10 +30,16 @@
         <ion-input type="text" placeholder="Title" formControlName="title"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input type="text" placeholder="Start Date" formControlName="startDate"></ion-input>
+        <ion-label>Category</ion-label>
+        <ion-select formControlName="category">
+          <ion-option *ngFor="let category of categories" [value]="category._id">{{category.name}}</ion-option>
+        </ion-select>
       </ion-item>
       <ion-item>
-        <ion-input type="text" placeholder="End Date" formControlName="endDate"></ion-input>
+        <ion-datetime placeholder="Start Date" formControlName="startDate" displayFormat="YYYY-MMM-DDTHH:mm" pickerFormat="YYYY-MMM-DDTHH:mm"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-datetime placeholder="End Date" formControlName="endDate" displayFormat="YYYY-MMM-DDTHH:mm" pickerFormat="YYYY-MMM-DDTHH:mm"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-textarea type="text" placeholder="Detail" formControlName="detail"></ion-textarea>

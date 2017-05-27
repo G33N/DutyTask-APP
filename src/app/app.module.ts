@@ -14,6 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TaskProvider } from '../providers/task';
 import { HttpModule } from '@angular/http';
+import { CategoryProvider } from '../providers/category/category';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { HttpModule } from '@angular/http';
     StatusBar,
     SplashScreen,
     TaskProvider,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    CategoryProvider
   ]
 })
 export class AppModule { }

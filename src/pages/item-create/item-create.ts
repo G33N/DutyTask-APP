@@ -3,6 +3,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, ViewController } from 'ionic-angular';
 
 import { TaskProvider } from '../../providers/task';
+import { CategoryProvider } from '../../providers/category/category';
 
 
 @Component({
@@ -13,17 +14,17 @@ export class ItemCreatePage {
   @ViewChild('fileInput') fileInput;
 
   isReadyToSave: boolean;
-
+  categories: any;
   task: any;
-
   form: FormGroup;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder) {
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public CategoryProvider: CategoryProvider) {
     this.form = formBuilder.group({
       title: ['', Validators.required],
+      category: ['', Validators.required],
       startDate: [''],
       endDate: [''],
-      detail: [''],
+      detail: ['', Validators.required],
       state: [''],
       date: new Date
     });
@@ -32,12 +33,21 @@ export class ItemCreatePage {
     this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
     });
+    // List cateories for select
+    this.getCategories()
+
   }
 
   ionViewDidLoad() {
 
   }
-
+  // List cateories for select
+  getCategories() {
+    this.CategoryProvider.get()
+      .then(data => {
+        this.categories = data;
+        });
+  }
   /**
    * The user cancelled, so we dismiss without sending data back.
    */

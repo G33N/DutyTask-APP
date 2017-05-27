@@ -17,6 +17,9 @@
   <ion-list>
     <ion-item-sliding *ngFor="let task of tasks">
       <button ion-item (click)="openTask(task)">
+        <ion-avatar item-left>
+          <ion-icon name="{{task.category.icon}}"></ion-icon>
+        </ion-avatar>
         <h2>{{task.title}}</h2>
         <p>{{task.detail}}</p>
         <ion-note item-end *ngIf="task.starDate">{{task.starDate}}</ion-note>
