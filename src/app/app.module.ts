@@ -9,6 +9,9 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ItemDetailPage } from '../pages/item-detail/item-detail';
 import { ItemCreatePage } from '../pages/item-create/item-create';
+import { LoginPage } from '../pages/login/login';
+import { SignupPage } from '../pages/signup/signup';
+import { WelcomePage } from '../pages/welcome/welcome';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -25,7 +28,10 @@ import { CategoryProvider } from '../providers/category/category';
     HomePage,
     TabsPage,
     ItemDetailPage,
-    ItemCreatePage
+    ItemCreatePage,
+    LoginPage,
+    SignupPage,
+    WelcomePage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +46,10 @@ import { CategoryProvider } from '../providers/category/category';
     HomePage,
     TabsPage,
     ItemDetailPage,
-    ItemCreatePage
+    ItemCreatePage,
+    LoginPage,
+    SignupPage,
+    WelcomePage
   ],
   providers: [
     StatusBar,
