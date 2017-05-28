@@ -1,5 +1,5 @@
 # DutyTask
-![alt text](https://photos.google.com/share/AF1QipNMmo5ZN7tykKdgggc1n-75zBIkUZXfmSWwJpSahIUqX59XkAP_pYUGQ7FIZ6a-8A/photo/AF1QipNjK0jb_8OfrRgZ6qbyO1zEnlgazIC_YdyOvyxm?key=cEZ2TC1UWFJMQzFtYnZRd0pVZXB1OE9mSjV6WVN3)
+![alt text](https://preview.ibb.co/i1UvCa/Screenshot_from_2017_05_28_15_03_25.png)
 Now... You #nevermind
 
 ## How install
