@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, ViewController } from 'ionic-angular';
 
-import { TaskProvider } from '../../providers/task';
 import { CategoryProvider } from '../../providers/category/category';
 
 

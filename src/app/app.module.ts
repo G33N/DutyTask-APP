@@ -18,6 +18,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TaskProvider } from '../providers/task';
 import { HttpModule } from '@angular/http';
 import { CategoryProvider } from '../providers/category/category';
+import { UserProvider } from '../providers/user/user';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { CategoryProvider } from '../providers/category/category';
     SplashScreen,
     TaskProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    CategoryProvider
+    CategoryProvider,
+    UserProvider
   ]
 })
 export class AppModule { }
