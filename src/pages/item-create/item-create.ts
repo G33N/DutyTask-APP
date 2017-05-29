@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, ViewController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { CategoryProvider } from '../../providers/category/category';
 
@@ -14,10 +15,9 @@ export class ItemCreatePage {
 
   isReadyToSave: boolean;
   categories: any;
-  task: any;
   form: FormGroup;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public CategoryProvider: CategoryProvider) {
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public CategoryProvider: CategoryProvider, private storage: Storage) {
     this.form = formBuilder.group({
       title: ['', Validators.required],
       category: ['', Validators.required],
@@ -25,9 +25,13 @@ export class ItemCreatePage {
       endDate: [''],
       detail: ['', Validators.required],
       state: [''],
+      user: [''],
       date: new Date
     });
-
+    // Or to get a key/value pair
+    storage.get('_id').then((val) => {
+      this.form.controls['user'].setValue(val);
+    });
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
@@ -40,12 +44,13 @@ export class ItemCreatePage {
   ionViewDidLoad() {
 
   }
+
   // List cateories for select
   getCategories() {
     this.CategoryProvider.get()
       .then(data => {
         this.categories = data;
-        });
+      });
   }
   /**
    * The user cancelled, so we dismiss without sending data back.

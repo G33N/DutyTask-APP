@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
+
+import { UserProvider } from '../../providers/user/user';
 import { TaskProvider } from '../../providers/task';
+
 import { ItemDetailPage } from '../item-detail/item-detail';
 import { ItemCreatePage } from '../item-create/item-create';
+
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
@@ -13,12 +18,15 @@ export class HomePage {
   tasks: any;
   category: any;
 
-  constructor(public navCtrl: NavController, public TaskProvider: TaskProvider, public modalCtrl: ModalController) {
-    this.getTaks();
+  constructor(public navCtrl: NavController, public TaskProvider: TaskProvider, public modalCtrl: ModalController, UserProvider: UserProvider, private storage: Storage) {
+    // Or to get a key/value pair
+    storage.get('_id').then((val) => {
+      this.getTaks(val);
+    });
   }
 
-  getTaks() {
-    this.TaskProvider.get()
+  getTaks(user) {
+    this.TaskProvider.get(user)
       .then(data => {
         this.tasks = data;
         console.log(data);
@@ -38,7 +46,9 @@ export class HomePage {
     addModal.onDidDismiss(task => {
       if (task) {
         this.TaskProvider.add(task).then(data => {
-          this.getTaks();
+          this.storage.get('_id').then((val) => {
+            this.getTaks(val);
+          });
         });
       }
     })
@@ -51,7 +61,9 @@ export class HomePage {
   deleteTask(task) {
     this.TaskProvider.delete(task).
       then(data => {
-        this.getTaks();
+        this.storage.get('_id').then((val) => {
+          this.getTaks(val);
+        });
       });
   }
 

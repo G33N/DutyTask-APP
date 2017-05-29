@@ -13,8 +13,13 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class SignupPage {
 
-  user: { firstName: string, lastName: string, user: string, email: string, password: string };
-  form: FormGroup;
+  user: { firstName: string, lastName: string, user: string, email: string, password: string } = {
+    firstName: '',
+    lastName: '',
+    user: '',
+    email: '',
+    password: ''
+      };
 
   // Our translated text strings
   private signupErrorString: string;
@@ -22,6 +27,8 @@ export class SignupPage {
   constructor(public navCtrl: NavController,
     public UserProvider: UserProvider,
     public toastCtrl: ToastController) {
+
+    this.signupErrorString = 'Signup fail';
   }
 
   doSignup() {

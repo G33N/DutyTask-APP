@@ -8,32 +8,32 @@
 
 
 <ion-content>
-  <form *ngIf="form" [formGroup]="form" (submit)="doSignup()">
+  <form (submit)="doSignup()">
     <ion-list>
 
       <ion-item>
         <ion-label fixed>First Name</ion-label>
-        <ion-input type="text" formControlName="user.firstName" name="name"></ion-input>
+        <ion-input type="text" [(ngModel)]="user.firstName" name="name"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label fixed>Last Name</ion-label>
-        <ion-input type="text" formControlName="user.lastName" name="name"></ion-input>
+        <ion-input type="text" [(ngModel)]="user.lastName" name="name"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label fixed>User</ion-label>
-        <ion-input type="text" formControlName="user.user" name="name"></ion-input>
+        <ion-input type="text" [(ngModel)]="user.user" name="name"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label fixed>Email</ion-label>
-        <ion-input type="email" formControlName="user.email" name="email"></ion-input>
+        <ion-input type="email" [(ngModel)]="user.email" name="email"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label fixed>Password</ion-label>
-        <ion-input type="password" formControlName="user.password" name="password"></ion-input>
+        <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
       </ion-item>
 
       <div padding>

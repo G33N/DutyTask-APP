@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Storage } from '@ionic/storage';
+import { Api } from './api';
 
 /**
  * A simple settings/config class for storing key/value pairs with persistence.
@@ -14,7 +15,7 @@ export class Settings {
   _defaults: any;
   _readyPromise: Promise<any>;
 
-  constructor(public storage: Storage, defaults: any) {
+  constructor(public storage: Storage, defaults: any, public api: Api) {
     this._defaults = defaults;
   }
 

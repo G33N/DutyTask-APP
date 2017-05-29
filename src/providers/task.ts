@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Api } from './api';
 
 /*
   Generated class for the TaskProvider provider.
@@ -12,14 +13,13 @@ import 'rxjs/add/operator/map';
 export class TaskProvider {
 
   data: any;
-  apiUrl = 'http://192.168.88.166:3002';
 
-  constructor(public http: Http) {
+  constructor(public http: Http, public api: Api) {
 
   }
-  get() {
+  get(user) {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/task')
+      this.http.get(this.api.url + '/task/' + user)
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;
@@ -29,7 +29,7 @@ export class TaskProvider {
   }
   add(data) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.apiUrl + '/task', data)
+      this.http.post(this.api.url + '/task', data)
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -40,7 +40,7 @@ export class TaskProvider {
 
   delete(task) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.apiUrl + '/task/delete/' + task, task)
+      this.http.post(this.api.url + '/task/delete/' + task, task)
         .subscribe(res => {
           resolve(res);
         }, (err) => {
