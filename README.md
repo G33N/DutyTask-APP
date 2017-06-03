@@ -1,5 +1,5 @@
 # DutyTask
-![alt text](https://preview.ibb.co/i1UvCa/Screenshot_from_2017_05_28_15_03_25.png)
+![alt text](https://scontent.faep1-1.fna.fbcdn.net/v/t31.0-8/18922926_10213078517981645_8689793225990187523_o.jpg?oh=6211abe921af402e3825e5544090fade&oe=59AEB375)
 
 Now... You #nevermind
 
