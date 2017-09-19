@@ -1,9 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { NavController, ViewController } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+import { Component } from '@angular/core';
+import { NavController, ViewController, ToastController } from 'ionic-angular';
 
 import { CategoryProvider } from '../../providers/category/category';
+import { Task } from '../../models/task';
+import { Category } from '../../models/category';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 
 @Component({
@@ -11,60 +13,52 @@ import { CategoryProvider } from '../../providers/category/category';
   templateUrl: 'item-create.html'
 })
 export class ItemCreatePage {
-  @ViewChild('fileInput') fileInput;
 
-  isReadyToSave: boolean;
   categories: any;
-  form: FormGroup;
+  task = {} as Task;
+  taskItemRef$: FirebaseListObservable<Task[]>
+  categoryListRef$: FirebaseListObservable<Category[]>
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public CategoryProvider: CategoryProvider, private storage: Storage) {
-    this.form = formBuilder.group({
-      title: ['', Validators.required],
-      category: ['', Validators.required],
-      startDate: [''],
-      endDate: [''],
-      detail: ['', Validators.required],
-      state: [''],
-      user: [''],
-      date: new Date
-    });
-    // Or to get a key/value pair
-    storage.get('_id').then((val) => {
-      this.form.controls['user'].setValue(val);
-    });
-    // Watch the form for changes, and
-    this.form.valueChanges.subscribe((v) => {
-      this.isReadyToSave = this.form.valid;
-    });
-    // List cateories for select
-    this.getCategories()
+  constructor(private AngularFireAuth: AngularFireAuth, private database: AngularFireDatabase, public navCtrl: NavController, public toastCtrl: ToastController, public viewCtrl: ViewController, public CategoryProvider: CategoryProvider) {
 
+    this.taskItemRef$ = this.database.list('task-list');
+    this.categoryListRef$ = this.database.list('category-list');
   }
 
   ionViewDidLoad() {
-
+    this.AngularFireAuth.authState.subscribe(data => {
+      if(data.email && data.uid){
+        this.task.user = data.uid;
+      }
+      else {
+        this.toastCtrl.create({
+          message: `Could not find authentication details`,
+          duration: 3000,
+          position: 'top'
+        }).present();
+      }
+    });
   }
 
-  // List cateories for select
-  getCategories() {
-    this.CategoryProvider.get()
-      .then(data => {
-        this.categories = data;
-      });
+  addTask(task: Task) {
+    this.taskItemRef$.push({
+      title: this.task.title,
+      category: this.task.category,
+      time: this.task.time,
+      detail: this.task.detail,
+      location: 'default',
+      state: 'Doing',
+      user: this.task.user,
+      date: new Date,
+    });
+
+    // Reset task Item
+    task = {} as Task;
+    // Go back to HomePage
+    this.navCtrl.pop();
   }
-  /**
-   * The user cancelled, so we dismiss without sending data back.
-   */
+
   cancel() {
     this.viewCtrl.dismiss();
-  }
-
-  /**
-   * The user is done and wants to create the item, so return it
-   * back to the presenter.
-   */
-  done() {
-    if (!this.form.valid) { return; }
-    this.viewCtrl.dismiss(this.form.value);
   }
 }

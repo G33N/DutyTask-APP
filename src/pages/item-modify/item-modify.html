@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Create Task</ion-title>
+    <ion-title>{{task.title}}</ion-title>
     <ion-buttons start>
       <button ion-button (click)="cancel()">
         <span color="primary" showWhen="ios">
@@ -10,7 +10,7 @@
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button (click)="addTask(task)" strong>
+      <button ion-button (click)="modifyTask(task)" strong>
         <span color="primary" showWhen="ios">
           Done
         </span>

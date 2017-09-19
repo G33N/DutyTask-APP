@@ -1,18 +1,14 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>{{ task.tittle }}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content>
-  <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + task.icon + ')'">
-  </div>
-
   <div class="item-detail" padding>
-    <h2>{{task.tittle}}</h2>
+    <h2>{{task.title}}</h2>
     <p>{{task.detail}}</p>
+    <p>{{task.time}}</p>
+    <p>task.location</p>
   </div>
 </ion-content>

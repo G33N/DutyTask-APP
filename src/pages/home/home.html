@@ -15,10 +15,10 @@
 <ion-content>
 
   <ion-list>
-    <ion-item-sliding *ngFor="let task of tasks">
+    <ion-item-sliding *ngFor="let task of taskListRef$ | async">
       <button ion-item (click)="openTask(task)">
         <ion-avatar item-left>
-          <ion-icon name="{{task.category.icon}}"></ion-icon>
+          <ion-icon name="{{task.category}}"></ion-icon>
         </ion-avatar>
         <h2>{{task.title}}</h2>
         <p>{{task.detail}}</p>
@@ -26,8 +26,8 @@
       </button>
 
       <ion-item-options>
-        <button ion-button color="danger" (click)="deleteTask(task._id)">
-          Delete
+        <button ion-button color="primary" (click)="displayOptions(task)">
+          <ion-icon name="create"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>

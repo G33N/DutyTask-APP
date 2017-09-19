@@ -8,6 +8,9 @@ page-welcome {
     background-repeat: repeat-x;
     animation: animatedBackground 40s linear infinite;
   }
+  .facebookLogin{
+    color: #4267B2;
+  }
 
   @keyframes animatedBackground {
     from { background-position: 0 0; }

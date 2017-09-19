@@ -2,43 +2,42 @@ import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 
 import { HomePage } from '../../pages/home/home';
-import { UserProvider } from '../../providers/user/user';
+
+import { AngularFireAuth } from 'angularfire2/auth';
+import { User } from '../../models/user';
+
 
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  account: { email: string, password: string } = {
-    email: '',
-    password: ''
-  };
+
+user = {email: 'mceliz@enlaceit.com.ar', password:'Seighei7'} as User;
 
   // Our translated text strings
   private loginErrorString: string;
 
-  constructor(public navCtrl: NavController,
-    public user: UserProvider,
-    public toastCtrl: ToastController) {
+  constructor(private AngularFireAuth: AngularFireAuth, public navCtrl: NavController, public toastCtrl: ToastController) {
 
       this.loginErrorString = 'Login fail';
   }
 
   // Attempt to login in through our User service
-  doLogin() {
-    this.user.login(this.account).then(data => {
-      this.navCtrl.push(HomePage);
-    }, (err) => {
-      // Unable to log in
+  async doLogin(user: User) {
+    try {
+      const result = await this.AngularFireAuth.auth.signInWithEmailAndPassword(user.email, user.password);
+      if(result){
+          this.navCtrl.setRoot(HomePage);
+      }
+    }
+    catch(error){
       let toast = this.toastCtrl.create({
         message: this.loginErrorString,
         duration: 3000,
         position: 'top'
       });
       toast.present();
-    });
+    }
   }
 }

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "571147479678",
+    "firebase_url": "https://dutytask-a4efc.firebaseio.com",
+    "project_id": "dutytask-a4efc",
+    "storage_bucket": "dutytask-a4efc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571147479678:android:dff0e7f5fe32dbe6",
+        "android_client_info": {
+          "package_name": "com.dutytask.enlaceit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571147479678-6b86q43d9b8gg139m46nh0g14egc178b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnWMvREXnbcqXsbVkbBAU5lqechR4BNRE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
