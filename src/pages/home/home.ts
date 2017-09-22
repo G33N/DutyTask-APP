@@ -1,35 +1,35 @@
 import { Component } from '@angular/core';
 import { Platform, NavController, ModalController, ToastController, ActionSheetController, AlertController } from 'ionic-angular';
-
+// Models
 import { Task } from '../../models/task';
-
+import { Profile } from '../../models/profile';
+// Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+// Pages
 import { ItemDetailPage } from '../item-detail/item-detail';
 import { ItemModifyPage } from '../item-modify/item-modify';
 import { ItemCreatePage } from '../item-create/item-create';
-
-
-
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-
   task = {} as Task;
+  profile = {} as Profile;
+  UID: string;
+  profileRef$: FirebaseObjectObservable<Profile>
   taskListRef$: FirebaseListObservable<Task[]>
 
   constructor(private alert: AlertController, private platform: Platform, private database: AngularFireDatabase, private AngularFireAuth: AngularFireAuth, public navCtrl: NavController, public modalCtrl: ModalController, public toastCtrl: ToastController, private actionSheet: ActionSheetController) {
 
-    //Pointing taskItemRef$ at firebase -> 'task-list'
-    this.taskListRef$ = this.database.list('task-list');
+    // Get user ID to query
+    this.AngularFireAuth.authState.subscribe(user => {
+      if(user) this.UID = user.uid
+    });
     this.onNotificacion();
-
   }
-
   /**
    * The view loaded, let's query our items for the list
    */
@@ -39,17 +39,25 @@ export class HomePage {
         this.toastCtrl.create({
           message: `Welcome to DutyTask, ${data.email}`,
           duration: 2000,
-          position: 'top'
+          position: 'bottom'
         }).present();
+        this.profileRef$ = this.database.object(`profile/${data.uid}`)
       }
       else {
         this.toastCtrl.create({
           message: `Could not find authentication details`,
           duration: 3000,
-          position: 'top'
+          position: 'bottom'
         }).present();
       }
     });
+    this.getUserTasks();
+  }
+  // Get all task of a user
+  getUserTasks(): FirebaseListObservable<Task[]> {
+    if (!this.UID) return;
+    this.taskListRef$ = this.database.list(`task-list/${this.UID}`);
+    return this.taskListRef$
   }
   /**
   * Notifications push
@@ -132,6 +140,7 @@ export class HomePage {
       task: task
     });
   }
+
   modifyTask(task: Task) {
     this.navCtrl.push(ItemModifyPage, {
       task: task

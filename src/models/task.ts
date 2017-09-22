@@ -1,11 +1,9 @@
 export interface Task {
-    $key?: String,
-    title: String,
-    category: String,
-    time: Date,
-    detail: String,
-    location: String,
-    state: String,
-    user: String,
-    date: String
+    title: string,
+    category: string,
+    time: string,
+    detail: string,
+    location: string,
+    state: string,
+    date: string
 }

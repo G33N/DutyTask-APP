@@ -1,12 +1,19 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
+import { NavController, ToastController } from 'ionic-angular';
+// Pages
 import { LoginPage } from '../login/login';
 import { SignupPage } from '../signup/signup';
 import { HomePage } from '../home/home';
-
+import { ProfilePage } from '../profile/profile';
+//  Providers
+import { LoginProvider } from '../../providers/login/login';
+// Local storage
+import { Storage } from '@ionic/storage';
+// Firebase
 import firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
+// Facebook
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 @Component({
   selector: 'page-welcome',
@@ -14,31 +21,61 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class WelcomePage {
 
-  constructor(public navCtrl: NavController, private AngularFireAuth: AngularFireAuth,) { }
+  localUser: any;
+
+  constructor(private facebook: Facebook, private storage: Storage, public navCtrl: NavController, private AngularFireAuth: AngularFireAuth, private LoginProvider: LoginProvider, public toastCtrl: ToastController) {
+    // Get local user to login
+    this.storage.get('user').then((val) => {
+      //this.checkLogin(val);
+    });
+  }
+
+  ionViewDidLoad() {
+    //this.checkLogin();
+  }
+
+  checkLogin(localUser) {
+    if (localUser) {
+      // console.log(localUser);
+      const result = this.LoginProvider.login(localUser);
+      console.log(result);
+      if (result)
+        this.navCtrl.setRoot(HomePage);
+    }
+    else {
+      console.log('Notting happen here')
+    }
+  }
 
   login() {
     this.navCtrl.push(LoginPage);
   }
 
-  async facebookLogin(){
-    var provider = new firebase.auth.FacebookAuthProvider();
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-      var token = result.credential.accessToken;
-      // The signed-in user info.
-      var user = result.user;
-      // ...
-      this.navCtrl.push('HomePage');
-    }).catch(function(error) {
+    async facebookLogin() {
+    // var provider = new firebase.auth.FacebookAuthProvider();
+    // firebase.auth().signInWithPopup(provider).then(function(result) {
+    //   // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+    //   var token = result.credential.accessToken;
+    //   // The signed-in user info.
+    //   var user = result.user;
+    //   // ...
+    //   this.navCtrl.setRoot(HomePage);
+    // }).catch(() => {
     //   // Handle Errors here.
-    //   var errorCode = error.code;
-    //   var errorMessage = error.message;
-    //   // The email of the user's account used.
-    //   var email = error.email;
-    //   // The firebase.auth.AuthCredential type that was used.
-    //   var credential = error.credential;
-    // // ...
-});
+    //   let toast = this.toastCtrl.create({
+    //     message: 'Authentication error',
+    //     duration: 3000,
+    //     position: 'top'
+    //   });
+    //   toast.present();
+    // });
+
+    // this.facebook.login(["email"]).then((loginResponse) => {
+    //   let credential = firebase.auth.FacebookAuthProvider.credential(loginResponse.authResponse.accessToken);
+    //   firebase.auth().signInWithCredential(credential).then((info) => {
+    //     console.log(JSON.stringify(info));
+    //   });
+    // });
   }
 
   signup() {

@@ -10,7 +10,6 @@
 <ion-content>
   <form (submit)="doLogin(user)">
     <ion-list>
-
       <ion-item>
         <ion-label fixed>Email</ion-label>
         <ion-input type="email" [(ngModel)]="user.email" name="email"></ion-input>
@@ -19,11 +18,10 @@
         <ion-label fixed>Password</ion-label>
         <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
       </ion-item>
-
       <div padding>
         <button ion-button color="primary" block>Login</button>
       </div>
-
     </ion-list>
   </form>
+    <button ion-button clear block (click)="recoverPassword(user)">Forgot your password?</button>
 </ion-content>

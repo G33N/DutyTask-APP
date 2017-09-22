@@ -36,6 +36,9 @@
         <ion-datetime placeholder="Start Date" [(ngModel)]="task.time" displayFormat="YYYY-MMM-DDTHH:mm" pickerFormat="YYYY-MMM-DDTHH:mm"></ion-datetime>
       </ion-item>
       <ion-item>
+        <ion-input type="text" placeholder="Address" [(ngModel)]="task.location"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-textarea type="text" placeholder="Detail" [(ngModel)]="task.detail"></ion-textarea>
       </ion-item>
     </ion-list>

@@ -20,36 +20,25 @@ export class ItemCreatePage {
   categoryListRef$: FirebaseListObservable<Category[]>
 
   constructor(private AngularFireAuth: AngularFireAuth, private database: AngularFireDatabase, public navCtrl: NavController, public toastCtrl: ToastController, public viewCtrl: ViewController, public CategoryProvider: CategoryProvider) {
-
-    this.taskItemRef$ = this.database.list('task-list');
+    this.task.time = new Date().toISOString();
     this.categoryListRef$ = this.database.list('category-list');
   }
 
   ionViewDidLoad() {
-    this.AngularFireAuth.authState.subscribe(data => {
-      if(data.email && data.uid){
-        this.task.user = data.uid;
-      }
-      else {
-        this.toastCtrl.create({
-          message: `Could not find authentication details`,
-          duration: 3000,
-          position: 'top'
-        }).present();
-      }
-    });
   }
 
   addTask(task: Task) {
-    this.taskItemRef$.push({
-      title: this.task.title,
-      category: this.task.category,
-      time: this.task.time,
-      detail: this.task.detail,
-      location: 'default',
-      state: 'Doing',
-      user: this.task.user,
-      date: new Date,
+    this.AngularFireAuth.authState.subscribe(auth => {
+      this.taskItemRef$ = this.database.list(`task-list/${auth.uid}`);
+      this.taskItemRef$.push({
+          title: this.task.title,
+          category: this.task.category,
+          time: this.task.time,
+          detail: this.task.detail,
+          location: this.task.location,
+          state: 'Doing',
+          date: new Date,
+        });
     });
 
     // Reset task Item
