@@ -4,16 +4,15 @@ import { NavController, ToastController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { SignupPage } from '../signup/signup';
 import { HomePage } from '../home/home';
-import { ProfilePage } from '../profile/profile';
 //  Providers
 import { LoginProvider } from '../../providers/login/login';
 // Local storage
 import { Storage } from '@ionic/storage';
 // Firebase
-import firebase from 'firebase';
+// import firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
 // Facebook
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { Facebook } from '@ionic-native/facebook';
 
 @Component({
   selector: 'page-welcome',
@@ -31,7 +30,7 @@ export class WelcomePage {
   }
 
   ionViewDidLoad() {
-    //this.checkLogin();
+    //this.navCtrl.setRoot(HomePage);
   }
 
   checkLogin(localUser) {

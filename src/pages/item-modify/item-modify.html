@@ -1,49 +1,47 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <ion-title>{{task.title}}</ion-title>
     <ion-buttons start>
       <button ion-button (click)="cancel()">
         <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons end>
-      <button ion-button (click)="modifyTask(task)" strong>
-        <span color="primary" showWhen="ios">
-          Done
-        </span>
-        <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
-
-
-<ion-content>
-    <ion-list>
-      <ion-item>
-        <ion-input type="text" placeholder="Title" [(ngModel)]="task.title"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Category</ion-label>
-        <ion-select [(ngModel)]="task.category">
-          <ion-option *ngFor="let category of categoryListRef$ | async" [value]="category.icon">{{category.name}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>State</ion-label>
-        <ion-select [(ngModel)]="task.state">
-          <ion-option *ngFor="let state of stateListRef$ | async" [value]="state.state">{{state.state}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-datetime placeholder="Start Date" [(ngModel)]="task.time" displayFormat="YYYY-MMM-DDTHH:mm" pickerFormat="YYYY-MMM-DDTHH:mm"></ion-datetime>
-      </ion-item>
-      <ion-item>
-        <ion-input type="text" placeholder="Address" [(ngModel)]="task.location"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-textarea type="text" placeholder="Detail" [(ngModel)]="task.detail"></ion-textarea>
-      </ion-item>
-
-    </ion-list>
+<ion-content class="background">
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <ion-list>
+          <ion-item>
+            <ion-input type="text" placeholder="Title" [(ngModel)]="task.title"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Category</ion-label>
+            <ion-select [(ngModel)]="task.category">
+              <ion-option *ngFor="let category of categoryListRef$ | async" [value]="category.icon">{{category.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>State</ion-label>
+            <ion-select [(ngModel)]="task.state">
+              <ion-option *ngFor="let state of stateListRef$ | async" [value]="state.state">{{state.state}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-datetime placeholder="Start Date" [(ngModel)]="task.time" displayFormat="YYYY-MMM-DDTHH:mm" pickerFormat="YYYY-MMM-DDTHH:mm"></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-input type="text" placeholder="Address" [(ngModel)]="task.location"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-textarea type="text" placeholder="Detail" [(ngModel)]="task.detail"></ion-textarea>
+          </ion-item>
+          <div padding>
+            <button ion-button full color="primary" (click)="modifyTask(task)">Modify</button>
+          </div>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

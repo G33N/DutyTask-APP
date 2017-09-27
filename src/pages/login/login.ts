@@ -37,7 +37,8 @@ export class LoginPage {
       const result = await this.AngularFireAuth.auth.signInWithEmailAndPassword(user.email, user.password);
       // Save currentUser to local store
       const currentUser = firebase.auth().currentUser;
-      this.storage.set('user', currentUser);
+      // I Comment this because it produce a CloneData error
+      //this.storage.set('user', currentUser);
       //Send email verification when user login
       if (!currentUser.emailVerified) {
         currentUser.sendEmailVerification().then(() => {

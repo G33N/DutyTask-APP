@@ -1,1 +1,35 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar color="secondary">
+      <ion-title>Profile</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="background">
+    <ion-grid class="menuProfile">
+      <ion-row>
+        <ion-col>
+          <ion-avatar class="iconBackground" item-left>
+            <ion-img class="avatarProfile" src="https://scontent-eze1-1.xx.fbcdn.net/v/t31.0-8/20232338_10213583528806600_4440754247759037295_o.jpg?oh=c9ea2a2c1d8658a567697caac7b94d52&oe=5A5418A5"></ion-img>
+          </ion-avatar>
+          <h3 class="titleProfile whiteFont">Matias Celiz</h3>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <button ion-item><ion-icon name="contact" item-start></ion-icon>Update Profile</button>
+    <ion-item-divider>
+      Lenguaje
+    </ion-item-divider>
+    <ion-list radio-group [(ngModel)]="relationship">
+      <ion-item>
+        <ion-label>English</ion-label>
+        <ion-radio value="EN" checked></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Spanish</ion-label>
+        <ion-radio value="ES"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <button ion-item><ion-icon name="key" item-end></ion-icon>Logout</button>
+  </ion-content>
+</ion-menu>
+<ion-nav [root]="rootPage" #content></ion-nav>

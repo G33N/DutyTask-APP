@@ -1,29 +1,33 @@
 <ion-header>
-
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <ion-title>Profile</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
-
-  <ion-item>
-    <ion-label color="primary" floating>Username</ion-label>
-    <ion-input [(ngModel)]="profile.username"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label color="primary" floating>Frist Name</ion-label>
-    <ion-input [(ngModel)]="profile.firstName"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label  color="primary" floating>Last Name</ion-label>
-    <ion-input [(ngModel)]="profile.lastName"></ion-input>
-  </ion-item>
-
-  <button ion-button clear block (click)="createProfile()">Create Profile</button>
-
+<ion-content padding class="background">
+  <ion-grid class="background">
+    <ion-avatar class="iconBackground" item-left>
+      <ion-img class="avatarProfile" src="https://scontent-eze1-1.xx.fbcdn.net/v/t31.0-8/20232338_10213583528806600_4440754247759037295_o.jpg?oh=c9ea2a2c1d8658a567697caac7b94d52&oe=5A5418A5"></ion-img>
+    </ion-avatar>
+    <ion-row>
+      <ion-col text-center>
+        <ion-item>
+          <ion-label fixed>Username</ion-label>
+          <ion-input [(ngModel)]="profile.username"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Frist Name</ion-label>
+          <ion-input [(ngModel)]="profile.firstName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Last Name</ion-label>
+          <ion-input [(ngModel)]="profile.lastName"></ion-input>
+        </ion-item>
+        <div padding>
+          <button ion-button full color="primary" (click)="createProfile()">Create Profile</button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
