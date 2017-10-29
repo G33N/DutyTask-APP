@@ -18,6 +18,7 @@ import { ItemCreatePage } from '../item-create/item-create';
 export class HomePage {
   task = {} as Task;
   profile = {} as Profile;
+  items: any;
   UID: string;
   profileRef$: FirebaseObjectObservable<Profile>
   taskListRef$: FirebaseListObservable<Task[]>
@@ -57,11 +58,39 @@ export class HomePage {
   getUserTasks(): FirebaseListObservable<Task[]> {
     if (!this.UID) return;
     this.taskListRef$ = this.database.list(`task-list/${this.UID}`);
+    this.taskListRef$.subscribe( snapshot => {
+      this.items = snapshot;
+    });
     return this.taskListRef$
   }
-  /**
-  * Notifications push
-  */
+  // Searchbar this filter the tasks
+  searchItems(ev: any) {
+    // Reset items back to all of the items
+    this.getUserTasks();
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.items = this.items.filter((item) => {
+        return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      });
+    }
+    console.log(this.items);
+  }
+
+  snapshotToArray(snapshot) {
+      var returnArr = [];
+
+      snapshot.forEach(function(childSnapshot) {
+          var item = childSnapshot.val();
+          item.key = childSnapshot.key;
+
+          returnArr.push(item);
+      });
+
+      return returnArr;
+    };
+  // Notifications push
   async onNotificacion(){
     if(typeof(FCMPlugin) != 'undefined') {
       try{

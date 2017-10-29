@@ -13,11 +13,7 @@ import { WelcomePage } from '../pages/welcome/welcome';
 import { ProfilePage } from '../pages/profile/profile';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { TaskProvider } from '../providers/task';
-import { Api } from '../providers/api';
 import { HttpModule } from '@angular/http';
-import { CategoryProvider } from '../providers/category/category';
-import { UserProvider } from '../providers/user/user';
 // Local storage
 import { IonicStorageModule } from '@ionic/storage';
 //FIREBASE
@@ -25,19 +21,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FIREBASE_CONFIG } from './app.firebase.config';
-import { LoginProvider } from '../providers/login/login';
 // Facebook
 import { Facebook } from '@ionic-native/facebook';
-import { FilterPipe } from '../pipes/filter/filter';
-// Native Camera
-//import { Camera } from '@ionic-native/camera';
-// Translate Module
-// import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-// import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-// AoT requires an exported function for factories
-// export function HttpLoaderFactory(http: HttpClient) {
-//     return new TranslateHttpLoader(http);
-// }
 
 @NgModule({
   declarations: [
@@ -50,7 +35,6 @@ import { FilterPipe } from '../pipes/filter/filter';
     SignupPage,
     WelcomePage,
     ProfilePage,
-    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -63,16 +47,6 @@ import { FilterPipe } from '../pipes/filter/filter';
     AngularFireAuthModule,
     // Import AngularFireAuthModule to use database interactions
     AngularFireDatabaseModule,
-    // HttpClientModule,
-    // TranslateModule.forRoot({
-    //       loader: {
-    //         provide: TranslateLoader,
-    //         useFactory: HttpLoaderFactory,
-    //         deps: [HttpClient]
-    //       }
-    //     }),
-    // Native Camera
-    // Camera,
     HttpModule
   ],
   bootstrap: [IonicApp],
@@ -90,12 +64,7 @@ import { FilterPipe } from '../pipes/filter/filter';
   providers: [
     StatusBar,
     SplashScreen,
-    TaskProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    CategoryProvider,
-    UserProvider,
-    Api,
-    LoginProvider,
     Facebook
   ]
 })

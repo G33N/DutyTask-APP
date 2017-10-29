@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController} from 'ionic-angular';
 
-import { TaskProvider } from '../../providers/task';
-
 @Component({
   selector: 'page-item-detail',
   templateUrl: 'item-detail.html'
@@ -10,7 +8,7 @@ import { TaskProvider } from '../../providers/task';
 export class ItemDetailPage {
   task: any;
 
-  constructor(public navCtrl: NavController, navParams: NavParams, tasks: TaskProvider, private modal: ModalController) {
+  constructor(public navCtrl: NavController, navParams: NavParams, private modal: ModalController) {
     this.task = navParams.get('task') || [];
   }
   openModal(){

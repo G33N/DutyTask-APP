@@ -22,7 +22,7 @@ export class WelcomePage {
 
   localUser: any;
 
-  constructor(private facebook: Facebook, private storage: Storage, public navCtrl: NavController, private AngularFireAuth: AngularFireAuth, private LoginProvider: LoginProvider, public toastCtrl: ToastController) {
+  constructor(private facebook: Facebook, private storage: Storage, public navCtrl: NavController, private AngularFireAuth: AngularFireAuth, public toastCtrl: ToastController) {
     // Get local user to login
     this.storage.get('user').then((val) => {
       //this.checkLogin(val);
@@ -34,16 +34,16 @@ export class WelcomePage {
   }
 
   checkLogin(localUser) {
-    if (localUser) {
-      // console.log(localUser);
-      const result = this.LoginProvider.login(localUser);
-      console.log(result);
-      if (result)
-        this.navCtrl.setRoot(HomePage);
-    }
-    else {
-      console.log('Notting happen here')
-    }
+    // if (localUser) {
+    //   // console.log(localUser);
+    //   const result = this.LoginProvider.login(localUser);
+    //   console.log(result);
+    //   if (result)
+    //     this.navCtrl.setRoot(HomePage);
+    // }
+    // else {
+    //   console.log('Notting happen here')
+    // }
   }
 
   login() {

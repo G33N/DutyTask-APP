@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ViewController, ToastController } from 'ionic-angular';
 
-import { CategoryProvider } from '../../providers/category/category';
 import { Task } from '../../models/task';
 import { Category } from '../../models/category';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -19,7 +18,7 @@ export class ItemCreatePage {
   taskItemRef$: FirebaseListObservable<Task[]>
   categoryListRef$: FirebaseListObservable<Category[]>
 
-  constructor(private AngularFireAuth: AngularFireAuth, private database: AngularFireDatabase, public navCtrl: NavController, public toastCtrl: ToastController, public viewCtrl: ViewController, public CategoryProvider: CategoryProvider) {
+  constructor(private AngularFireAuth: AngularFireAuth, private database: AngularFireDatabase, public navCtrl: NavController, public toastCtrl: ToastController, public viewCtrl: ViewController) {
     this.task.time = new Date().toISOString();
     this.categoryListRef$ = this.database.list('category-list');
   }

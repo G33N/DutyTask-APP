@@ -15,8 +15,9 @@
 </ion-header>
 
 <ion-content class="background">
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="searchItems($event)"></ion-searchbar>
   <ion-list>
-    <ion-item-sliding *ngFor="let task of taskListRef$ | async ">
+    <ion-item-sliding *ngFor="let task of items ">
       <button class="frontBackground" ion-item (click)="openTask(task)">
         <ion-avatar class="avatar iconBackground" item-left>
           <ion-icon name="{{task.category}}"></ion-icon>
